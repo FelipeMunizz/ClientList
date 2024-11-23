@@ -2,9 +2,10 @@
 
 public static class AddUserCommand
 {
-    public static string Command = """
-        INSERT INTO TB_USER 
-            (USER_NAME, USER_PASSWORD, USER_EMAIL, DATE_CHANGE, ACTIVE)
+    public static string Command = 
+        """
+        INSERT INTO [TB_USER] 
+            ([USER_NAME], [USER_PASSWORD], [USER_EMAIL], [DATE_CHANGE], [ACTIVE])
         VALUES 
             (@UserName, @UserPassword, @UserEmail, @DateChange, @Active);
         SELECT 

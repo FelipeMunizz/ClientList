@@ -1,37 +1,28 @@
 ﻿using Dapper;
 using Domain.Interfaces;
 using Entities.Model;
-using FluentValidation;
-using FluentValidation.Results;
 using Helpers.Cryptography;
+using Infrastructure.Commands.Delete;
 using Infrastructure.Commands.Insert;
+using Infrastructure.Commands.Select;
+using Infrastructure.Commands.Update;
 using Infrastructure.Context;
-using System;
 using static Infrastructure.Commands.Insert.AddUserCommand;
 
 namespace Infrastructure.Repository;
 
 public class UserRepository : IUserRepository
 {
-    private IValidator<User> _validatorUser;
     private AppDbContext _context;
 
-    public UserRepository(IValidator<User> validatorUser, AppDbContext context)
+    public UserRepository(AppDbContext context)
     {
-        _validatorUser = validatorUser;
         _context = context;
     }
 
     public async Task<User> AddUser(User user)
     {
-        ValidationResult validationResult = await _validatorUser.ValidateAsync(user);
-
-        if (!validationResult.IsValid)
-            throw new Exception("Usuário com informações invalidas!");
-
-        CryptographyHelper cryptographyHelper = new CryptographyHelper();
-
-        user.USER_PASSWORD = cryptographyHelper.Encrypt(user.USER_PASSWORD);
+        user.USER_PASSWORD = CryptographyPassword(user.USER_PASSWORD);
 
         var parameters = new
         {
@@ -48,25 +39,91 @@ public class UserRepository : IUserRepository
             transaction: _context.Transaction
          );
 
-        AddUserResult result = await _context.Connection.QueryFirstAsync(command);
+        AddUserResult result = await _context.Connection.QueryFirstOrDefaultAsync<AddUserResult>(command);
 
         user.ID_USER = result.ID_USER;
 
         return user;
     }
 
-    public Task DeleteUser(int idUser)
+    public async Task UpdateUser(User user)
     {
-        throw new NotImplementedException();
+        user.USER_PASSWORD = CryptographyPassword(user.USER_PASSWORD);
+
+        var parameters = new
+        {
+            IdUser = user.ID_USER,
+            UserName = user.USER_NAME,
+            UserPassword = user.USER_PASSWORD,
+            UserEmail = user.USER_EMAIL,
+            DateChange = DateTime.Now,
+            Active = user.ACTIVE
+        };
+
+        CommandDefinition command = new(
+            UpdateUserCommand.Command,
+            parameters: parameters,
+            transaction: _context.Transaction
+        );
+
+        await _context.Connection.ExecuteAsync(command);
     }
 
-    public Task<User> GetUserById(int idUser)
+    public async Task DeleteUser(int idUser)
     {
-        throw new NotImplementedException();
+        var parameters = new
+        {
+            IdUser = idUser
+        };
+
+        CommandDefinition command = new(
+            DeleteUserCommand.Command,
+            parameters: parameters,
+            transaction: _context.Transaction
+         );
+
+        await _context.Connection.ExecuteAsync(command);
     }
 
-    public Task UpdateUser(User user)
+    public async Task<User> GetUserById(int idUser)
     {
-        throw new NotImplementedException();
+        var parameters = new
+        {
+            IdUser = idUser
+        };
+
+        CommandDefinition command = new(
+            GetUserByIdCommand.Command,
+            parameters: parameters,
+            transaction: _context.Transaction
+         );
+
+        return await _context.Connection.QueryFirstOrDefaultAsync<User>(command);
+    }
+
+    public async Task<User> LoginUser(string userEmail, string password)
+    {
+        password = CryptographyPassword(password);
+
+        var parameters = new
+        {
+            UserEmail = userEmail,
+            UserPassword = password
+        };
+
+        CommandDefinition command = new(
+            LoginUserCommand.Command,
+            parameters: parameters,
+            transaction: _context.Transaction
+        );
+
+        return await _context.Connection.QueryFirstOrDefaultAsync<User>(command);
+    }
+
+    private string CryptographyPassword(string password)
+    {
+        CryptographyHelper cryptographyHelper = new CryptographyHelper();
+
+        return cryptographyHelper.Encrypt(password);
     }
 }

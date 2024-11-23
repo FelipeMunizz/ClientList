@@ -12,3 +12,9 @@ public class User
     public DateTime DATE_CHANGE { get; set; }
     public bool ACTIVE { get; set; }
 }
+
+public class LoginUser
+{
+    public string UserEmail { get; set; }
+    public string UserPassword { get; set; }
+}
