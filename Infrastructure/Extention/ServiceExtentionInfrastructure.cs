@@ -14,6 +14,8 @@ public static class ServiceExtentionInfrastructure
     public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services)
     {
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IClientRepository, ClienteRepository>();
+
         services.AddScoped<IDbConnection>(sp =>
         {
             var connectionString = sp.GetRequiredService<IConfiguration>().GetConnectionString(Util.ConectionString);

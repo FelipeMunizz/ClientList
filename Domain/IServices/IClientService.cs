@@ -1,12 +1,13 @@
 ﻿using Entities.Model;
+using Entities.Response;
 
-namespace Domain.Interfaces;
+namespace Domain.IServices;
 
-public interface IClientRepository
+public interface IClientService
 {
     Task<IEnumerable<object>> GetAllClient(int idUser);
     Task<Client> GetClientById(int idClient);
-    Task<Client> AddClient(Client client);
+    Task<WebResponse<Client>> AddClient(Client client);
     Task UpdateClient(Client client);
     Task DeleteClient(int idClient);
 }

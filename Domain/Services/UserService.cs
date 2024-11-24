@@ -29,15 +29,10 @@ public class UserService : IUserService
 
             if (!validation.IsValid)
             {
-                StringBuilder stringBuilder = new StringBuilder();
-
-                foreach(ValidationFailure erros in validation.Errors)
-                    stringBuilder.AppendLine(erros.ErrorMessage);
-
                 return new WebResponse<User>
                 {
                     Success = false,
-                    Message = $"Dados informados inválidos. {stringBuilder.ToString()}",
+                    Message = $"Dados informados inválidos.",
                     Data = user
                 };
             }
@@ -99,6 +94,7 @@ public class UserService : IUserService
                 Message = "Usuário logado com sucesso",
                 Data = new
                 {
+                    IdUser = user.ID_USER,
                     Token = token.value,
                     token.ValidTo
                 }

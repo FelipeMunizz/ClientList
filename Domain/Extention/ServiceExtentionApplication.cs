@@ -9,6 +9,7 @@ public static class ServiceExtentionApplication
     public static IServiceCollection AddSharedApplication(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IClientService, ClientService>();
 
         return services;
     }

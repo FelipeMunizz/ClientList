@@ -1,4 +1,7 @@
-﻿namespace Entities.Model;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
+namespace Entities.Model;
 
 public class Client
 {
@@ -13,4 +16,8 @@ public class Client
     public string? CITY { get; set; }
     public DateTime DATE_CHANGE { get; set; }
 
+    [ForeignKey("USER")]
+    public int ID_USER { get; set; }
+    [JsonIgnore]
+    public virtual User? USER { get; set; }
 }
