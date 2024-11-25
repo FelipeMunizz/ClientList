@@ -18,19 +18,29 @@ namespace Api.Controllers
             _service = service;
         }
 
-        [HttpGet("GetAllClient/{idUser:int}")]
+        [HttpGet("GetAllClient")]
         [Produces("application/json")]
-        public async Task<IEnumerable<object>> GetAllClient(int idUser) 
+        public async Task<IEnumerable<object>> GetAllClient([FromQuery] int idUser) 
             => await _service.GetAllClient(idUser);
 
-        [HttpGet("GetClientById/{idClient:int}")]
+        [HttpGet("GetClientById")]
         [Produces("application/json")]
-        public async Task<ActionResult<Client>> GetClientById(int idClient)
+        public async Task<ActionResult<Client>> GetClientById([FromQuery] int idClient)
             => await _service.GetClientById(idClient);
 
         [HttpPost("AddClient")]
         [Produces("application/json")]
         public async Task<ActionResult<WebResponse<Client>>> AddClient(Client client) 
             => await _service.AddClient(client);
+
+        [HttpPut("UpdateClient")]
+        [Produces("application/json")]
+        public async Task<ActionResult<WebResponse<Client>>> UpdateClient(Client client)
+            => await _service.UpdateClient(client);
+
+        [HttpDelete("DeleteClient/{idClient:int}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<WebResponse<bool>>> DeleteClient(int idClient)
+            => await _service.DeleteClient(idClient);
     }
 }

@@ -1,4 +1,4 @@
-using static Entities.Extention.ServiceExtentionEntities;
+    using static Entities.Extention.ServiceExtentionEntities;
 using static Infrastructure.Extention.ServiceExtentionInfrastructure;
 using static Domain.Extention.ServiceExtentionApplication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -43,6 +43,11 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 
+});
+
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = null;
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
