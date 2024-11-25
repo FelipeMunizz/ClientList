@@ -20,7 +20,7 @@ namespace Api.Controllers
 
         [HttpGet("GetAllClient")]
         [Produces("application/json")]
-        public async Task<IEnumerable<object>> GetAllClient([FromQuery] int idUser) 
+        public async Task<IEnumerable<object>> GetAllClient([FromQuery] int idUser)
             => await _service.GetAllClient(idUser);
 
         [HttpGet("GetClientById")]
@@ -30,7 +30,7 @@ namespace Api.Controllers
 
         [HttpPost("AddClient")]
         [Produces("application/json")]
-        public async Task<ActionResult<WebResponse<Client>>> AddClient(Client client) 
+        public async Task<ActionResult<WebResponse<Client>>> AddClient(Client client)
             => await _service.AddClient(client);
 
         [HttpPut("UpdateClient")]
@@ -38,9 +38,9 @@ namespace Api.Controllers
         public async Task<ActionResult<WebResponse<Client>>> UpdateClient(Client client)
             => await _service.UpdateClient(client);
 
-        [HttpDelete("DeleteClient/{idClient:int}")]
+        [HttpDelete("DeleteClient")]
         [Produces("application/json")]
-        public async Task<ActionResult<WebResponse<bool>>> DeleteClient(int idClient)
+        public async Task<ActionResult<WebResponse<bool>>> DeleteClient([FromQuery] int idClient)
             => await _service.DeleteClient(idClient);
     }
 }
