@@ -46,16 +46,16 @@ public class ClienteRepository : IClientRepository
     {
         var parameters = new
         {
-            Name = client.NAME,
-            Cpf = client.CPF,
-            PhoneNumber = client.PHONE_NUMBER,
-            Email = client.EMAIL,
-            DateBirth = client.DATE_BIRTH,
-            Address = client.ADDRESS,
-            Cep = client.CEP,
-            City = client.CITY,
+            client.Name,
+            client.Cpf,
+            client.PhoneNumber,
+            client.Email,
+            client.DateBirth,
+            client.Address,
+            client.Cep,
+            client.City,
             DateChange = DateTime.Now,
-            IdUser = client.ID_USER
+            client.IdUser
         };
 
         CommandDefinition command = new(
@@ -66,7 +66,7 @@ public class ClienteRepository : IClientRepository
 
         AddClientResult? result = await _context.Connection.QueryFirstOrDefaultAsync<AddClientResult>(command);
 
-        client.ID_CLIENT = result.ID_CLIENT;
+        client.IdClient = result.ID_CLIENT;
 
         return client;
     }
@@ -75,16 +75,16 @@ public class ClienteRepository : IClientRepository
     {
         var parameters = new
         {
-            Name = client.NAME,
-            Cpf = client.CPF,
-            PhoneNumber = client.PHONE_NUMBER,
-            Email = client.EMAIL,
-            DateBirth = client.DATE_BIRTH,
-            Address = client.ADDRESS,
-            Cep = client.CEP,
-            City = client.CITY,
+            client.Name,
+            client.Cpf,
+            client.PhoneNumber,
+            client.Email,
+            client.DateBirth,
+            client.Address,
+            client.Cep,
+            client.City,
             DateChange = DateTime.Now,
-            IdClient = client.ID_CLIENT
+            client.IdClient
         };
 
         CommandDefinition command = new(

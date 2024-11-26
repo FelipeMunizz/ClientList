@@ -5,39 +5,28 @@ namespace Entities.Model;
 
 public class Client
 {
-    [JsonPropertyName("ID_CLIENT")]
-    public int ID_CLIENT { get; set; }
+    public int IdClient { get; set; }
 
-    [JsonPropertyName("NAME")]
-    public string? NAME { get; set; }
+    public string? Name { get; set; }
 
-    [JsonPropertyName("CPF")]
-    public string? CPF { get; set; }
+    public string? Cpf { get; set; }
 
-    [JsonPropertyName("PHONE_NUMBER")]
-    public string? PHONE_NUMBER { get; set; }
+    public string? PhoneNumber { get; set; }
 
-    [JsonPropertyName("EMAIL")]
-    public string? EMAIL { get; set; }
+    public string? Email { get; set; }
 
-    [JsonPropertyName("DATE_BIRTH")]
-    public DateTime DATE_BIRTH { get; set; }
+    public DateTime DateBirth { get; set; }
 
-    [JsonPropertyName("ADDRESS")]
-    public string? ADDRESS { get; set; }
+    public string? Address { get; set; }
 
-    [JsonPropertyName("CEP")]
-    public string? CEP { get; set; }
+    public string? Cep { get; set; }
 
-    [JsonPropertyName("CITY")]
-    public string? CITY { get; set; }
+    public string? City { get; set; }
 
-    [JsonPropertyName("DATE_CHANGE")]
-    public DateTime DATE_CHANGE { get; set; }
+    public DateTime DateChange { get; set; }
 
-    [JsonPropertyName("ID_USER")]
     [ForeignKey("USER")]
-    public int ID_USER { get; set; }
+    public int IdUser { get; set; }
     [JsonIgnore]
     public virtual User? USER { get; set; }
 }

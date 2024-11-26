@@ -85,6 +85,7 @@ public class UserService : IUserService
                 .AddIssuer("ClientList.Security.Bearer")
                 .AddAudience("ClientList.Security.Bearer")
                 .AddClaim("UsuarioEmail", userEmail)
+                .AddClaim("IdUser", user.ID_USER.ToString())
                 .AddExpiry(1440)
                 .Builder();
 
