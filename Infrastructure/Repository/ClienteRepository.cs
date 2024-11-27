@@ -44,13 +44,15 @@ public class ClienteRepository : IClientRepository
 
     public async Task<Client> AddClient(Client client)
     {
+        DateTime birthDate = Convert.ToDateTime(client.DateBirth);
+
         var parameters = new
         {
             client.Name,
             client.Cpf,
             client.PhoneNumber,
             client.Email,
-            client.DateBirth,
+            DateBirth = birthDate,
             client.Address,
             client.Cep,
             client.City,
@@ -73,13 +75,14 @@ public class ClienteRepository : IClientRepository
 
     public async Task UpdateClient(Client client)
     {
+        DateTime birthDate = Convert.ToDateTime(client.DateBirth);
         var parameters = new
         {
             client.Name,
             client.Cpf,
             client.PhoneNumber,
             client.Email,
-            client.DateBirth,
+            DateBirth = birthDate,
             client.Address,
             client.Cep,
             client.City,

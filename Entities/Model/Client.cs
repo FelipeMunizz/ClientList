@@ -15,7 +15,7 @@ public class Client
 
     public string? Email { get; set; }
 
-    public DateTime DateBirth { get; set; }
+    public string? DateBirth { get; set; }
 
     public string? Address { get; set; }
 
