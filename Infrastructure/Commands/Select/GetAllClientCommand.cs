@@ -5,17 +5,17 @@ public static class GetAllClientCommand
     public static string Command =
         """
          SELECT 
-             [CLIENT].[ID_CLIENT],
-             [CLIENT].[NAME],
-             [CLIENT].[CPF],
-             [CLIENT].[EMAIL],
-             [CLIENT].[PHONE_NUMBER],
-             [CLIENT].[DATE_BIRTH],
-             [CLIENT].[ADDRESS],
-             [CLIENT].[CEP],
-             [CLIENT].[CITY],
-             [USER].[ID_USER],
-             [USER].[USER_NAME]
+             [CLIENT].[ID_CLIENT] as [IdClient],
+             [CLIENT].[NAME] as [Name],
+             [CLIENT].[CPF] as [Cpf],
+             [CLIENT].[EMAIL] as [Email],
+             [CLIENT].[PHONE_NUMBER] as [PhoneNumber],
+             FORMAT([CLIENT].[DATE_BIRTH], 'dd/MM/yyyy') AS [DateBirth],
+             [CLIENT].[ADDRESS] as [Address],
+             [CLIENT].[CEP] as [Cep],
+             [CLIENT].[CITY] as [City],
+             [USER].[ID_USER] as [IdUser],
+             [USER].[USER_NAME] as [UserName]
          FROM [TB_CLIENT] AS [CLIENT]
          JOIN [TB_USER] AS [USER] ON [CLIENT].[ID_USER] = [USER].[ID_USER]
          WHERE 
@@ -23,16 +23,16 @@ public static class GetAllClientCommand
         """;
     public sealed class GetAllClientResult
     {
-        public int ID_CLIENT { get; set; }
-        public string? NAME { get; set; }
-        public string? CPF { get; set; }
-        public string? EMAIL { get; set; }
-        public string? PHONE_NUMBER { get; set; }
-        public DateTime DATE_BIRTH { get; set; }
-        public string? ADDRESS { get; set; }
-        public string? CEP { get; set; }
-        public string? CITY { get; set; }
-        public int ID_USER { get; set; }
-        public string? USER_NAME { get; set; }
+        public int IdClient { get; set; }
+        public string? Name { get; set; }
+        public string? Cpf { get; set; }
+        public string? Email { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string DateBirht { get; set; }
+        public string? address { get; set; }
+        public string? cep { get; set; }
+        public string? city { get; set; }
+        public int IdUser { get; set; }
+        public string? UserName { get; set; }
     }
 }
