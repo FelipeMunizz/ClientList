@@ -14,25 +14,10 @@ public static class GetAllClientCommand
              [CLIENT].[ADDRESS] as [Address],
              [CLIENT].[CEP] as [Cep],
              [CLIENT].[CITY] as [City],
-             [USER].[ID_USER] as [IdUser],
-             [USER].[USER_NAME] as [UserName]
+             [USER].[ID_USER] as [IdUser]
          FROM [TB_CLIENT] AS [CLIENT]
          JOIN [TB_USER] AS [USER] ON [CLIENT].[ID_USER] = [USER].[ID_USER]
          WHERE 
              [CLIENT].[ID_USER] = @IdUser
         """;
-    public sealed class GetAllClientResult
-    {
-        public int IdClient { get; set; }
-        public string? Name { get; set; }
-        public string? Cpf { get; set; }
-        public string? Email { get; set; }
-        public string? PhoneNumber { get; set; }
-        public string DateBirht { get; set; }
-        public string? address { get; set; }
-        public string? cep { get; set; }
-        public string? city { get; set; }
-        public int IdUser { get; set; }
-        public string? UserName { get; set; }
-    }
 }

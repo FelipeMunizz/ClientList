@@ -20,7 +20,7 @@ public class ClienteRepository : IClientRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<object>> GetAllClient(int idUser)
+    public async Task<IEnumerable<Client>> GetAllClient(int idUser)
     {
         CommandDefinition command = new(
             GetAllClientCommand.Command,
@@ -28,7 +28,7 @@ public class ClienteRepository : IClientRepository
             transaction: _context.Transaction
         );
 
-        return await _context.Connection.QueryAsync<GetAllClientResult>(command);
+        return await _context.Connection.QueryAsync<Client>(command);
     }
 
     public async Task<Client> GetClientById(int idClient)

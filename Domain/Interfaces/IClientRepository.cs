@@ -4,7 +4,7 @@ namespace Domain.Interfaces;
 
 public interface IClientRepository
 {
-    Task<IEnumerable<object>> GetAllClient(int idUser);
+    Task<IEnumerable<Client>> GetAllClient(int idUser);
     Task<Client> GetClientById(int idClient);
     Task<Client> AddClient(Client client);
     Task UpdateClient(Client client);

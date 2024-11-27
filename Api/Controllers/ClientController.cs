@@ -18,6 +18,7 @@ namespace Api.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         [HttpGet("GetAllClient")]
         [Produces("application/json")]
         public async Task<IEnumerable<object>> GetAllClient([FromQuery] int idUser)

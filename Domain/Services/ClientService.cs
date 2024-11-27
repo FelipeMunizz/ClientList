@@ -18,7 +18,7 @@ public class ClientService : IClientService
         _validator = validator;
     }
 
-    public Task<IEnumerable<object>> GetAllClient(int idUser) => _repository.GetAllClient(idUser);
+    public Task<IEnumerable<Client>> GetAllClient(int idUser) => _repository.GetAllClient(idUser);
 
     public async Task<Client> GetClientById(int idClient) => await _repository.GetClientById(idClient);
 
